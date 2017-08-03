@@ -1,1 +1,1 @@
-	return LIS3DH_GetYaxisRaw();
+	return BMA250_GetYaxisRaw();

@@ -1,1 +1,1 @@
-	BMA250E_Init();
+	BMA250_Init();

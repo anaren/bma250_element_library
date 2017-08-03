@@ -1,1 +1,1 @@
-	return LIS3DH_GetXaxisRaw();
+	return BMA250_GetXaxisRaw();

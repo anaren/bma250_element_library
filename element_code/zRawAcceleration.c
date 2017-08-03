@@ -1,1 +1,1 @@
-	return LIS3DH_GetZaxisRaw();
+	return BMA250_GetZaxisRaw();
