@@ -71,7 +71,7 @@
 			"chip select":{
 				"name":"Chip Select Pin",
 				"input":"TextField",
-				"prefix":"#define bma250_CSPIN ",
+				"prefix":"#define BMA250_CSPIN ",
 				"value":"D20",
 				"regex":"^[0-9]*$|^D[0-9]*$|^A[0-9]*$"
 			}
