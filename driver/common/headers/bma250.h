@@ -129,6 +129,7 @@ Read WHO_AM_I identification register.
 */
 uint8_t BMA250_GetWhoAmIReg(void);
 
+BMA250_accel_mode_t BMA250_GetPMURange();
 
 int16_t BMA250_GetXaxisRaw(void);
 int16_t BMA250_GetYaxisRaw(void);
