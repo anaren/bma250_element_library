@@ -26,8 +26,8 @@
 // of the authors and should not be interpreted as representing official policies, 
 // either expressed or implied, of the FreeBSD Project.
 
-#ifndef BMA250E_H
-#define BMA250E_H
+#ifndef BMA250_H
+#define BMA250_H
 
 //------------------------------------------------------------------------------
 /**
@@ -35,7 +35,7 @@
  */
 
 #include "pin_mapping.h"
-#include "BMA250E_config.h"
+#include "bma250_config.h"
 #include "../spi/spi.h"
 #include <stdint.h>
 
@@ -55,88 +55,88 @@
 /**
  *  Defines, enumerations, and structure definitions
  */
-#define BMA250E_WHO_AM_I_REG_ADDR        0x00  // Device Identification (read only)
-#define BMA250E_OUT_X_L_REG_ADDR         0x02  // Data Output X LSB (read only)
-#define BMA250E_OUT_X_H_REG_ADDR         0x03  // Data Output X MSB (read only)
-#define BMA250E_OUT_Y_L_REG_ADDR         0x04  // Data Output Y LSB (read only)
-#define BMA250E_OUT_Y_H_REG_ADDR         0x05  // Data Output Y MSB (read only)
-#define BMA250E_OUT_Z_L_REG_ADDR         0x06  // Data Output Z LSB (read only)
-#define BMA250E_OUT_Z_H_REG_ADDR         0x07  // Data Output Z MSB (read only)
+#define BMA250_WHO_AM_I_REG_ADDR        0x00  // Device Identification (read only)
+#define BMA250_OUT_X_L_REG_ADDR         0x02  // Data Output X LSB (read only)
+#define BMA250_OUT_X_H_REG_ADDR         0x03  // Data Output X MSB (read only)
+#define BMA250_OUT_Y_L_REG_ADDR         0x04  // Data Output Y LSB (read only)
+#define BMA250_OUT_Y_H_REG_ADDR         0x05  // Data Output Y MSB (read only)
+#define BMA250_OUT_Z_L_REG_ADDR         0x06  // Data Output Z LSB (read only)
+#define BMA250_OUT_Z_H_REG_ADDR         0x07  // Data Output Z MSB (read only)
 
-#define BMA250E_REG_ACCEL_PMU_RANGE 	 0x0F
-#define BMA250E_REG_ACCEL_PMU_BW 		 0x10
+#define BMA250_REG_ACCEL_PMU_RANGE 	 0x0F
+#define BMA250_REG_ACCEL_PMU_BW 		 0x10
 
-#define BMA250E_SPI_MODE 0
-#define BMA250E_MSB_FIRST 1
+#define BMA250_SPI_MODE 0
+#define BMA250_MSB_FIRST 1
 /**
- *  eBMA250EOperatingMode - type indicating the operating mode of the
- *  BMA250E device.  The BMA250E offers two modes; Normal and Low-power.  Refer
- *  to the BMA250E datasheet for details regarding the different modes.
+ *  eBMA250OperatingMode - type indicating the operating mode of the
+ *  BMA250 device.  The BMA250 offers two modes; Normal and Low-power.  Refer
+ *  to the BMA250 datasheet for details regarding the different modes.
  */
-enum eBMA250EOperatingMode
+enum eBMA250OperatingMode
 {
-  BMA250E_LowPower              = 0x00,
-  BMA250E_Normal                = 0x01
+  BMA250_LowPower              = 0x00,
+  BMA250_Normal                = 0x01
 };
 
 /**
- *  eBMA250EDataRate - type indicating the output data rate of the BMA250E
+ *  eBMA250DataRate - type indicating the output data rate of the BMA250
  *  device, specified in Hz.
  */
-enum eBMA250EDataRate
+enum eBMA250DataRate
 {
-  BMA250E_Rate_PowerDown        = 0x00, // power down mode (default)
-  BMA250E_Rate_1Hz              = 0x01, // normal & low-power modes
-  BMA250E_Rate_10Hz             = 0x02, // normal & low-power modes
-  BMA250E_Rate_25Hz             = 0x03, // normal & low-power modes
-  BMA250E_Rate_50Hz             = 0x04, // normal & low-power modes
-  BMA250E_Rate_100Hz            = 0x05, // normal & low-power modes
-  BMA250E_Rate_200Hz            = 0x06, // normal & low-power modes
-  BMA250E_Rate_400Hz            = 0x07, // normal & low-power modes
-  BMA250E_Rate_1600Hz           = 0x08, // low-power mode only
-  BMA250E_Rate_1250Hz_5000Hz    = 0x09  // 1.25kHz normal mode, 5kHz low-power mode
+  BMA250_Rate_PowerDown        = 0x00, // power down mode (default)
+  BMA250_Rate_1Hz              = 0x01, // normal & low-power modes
+  BMA250_Rate_10Hz             = 0x02, // normal & low-power modes
+  BMA250_Rate_25Hz             = 0x03, // normal & low-power modes
+  BMA250_Rate_50Hz             = 0x04, // normal & low-power modes
+  BMA250_Rate_100Hz            = 0x05, // normal & low-power modes
+  BMA250_Rate_200Hz            = 0x06, // normal & low-power modes
+  BMA250_Rate_400Hz            = 0x07, // normal & low-power modes
+  BMA250_Rate_1600Hz           = 0x08, // low-power mode only
+  BMA250_Rate_1250Hz_5000Hz    = 0x09  // 1.25kHz normal mode, 5kHz low-power mode
 };
 
 typedef enum {
-	BMA250E_MODE_2G = 0x3,
-	BMA250E_MODE_4G = 0x5,
-	BMA250E_MODE_8G = 0x8,
-	BMA250E_MODE_16G = 0xC,
-} BMA250E_accel_mode_t;
+	BMA250_MODE_2G = 0x3,
+	BMA250_MODE_4G = 0x5,
+	BMA250_MODE_8G = 0x8,
+	BMA250_MODE_16G = 0xC,
+} BMA250_accel_mode_t;
 
-void BMA250E_Init();
+void BMA250_Init();
 
 /**
-Write an 8-bit value to a device register.  All of the BMA250E registers are
+Write an 8-bit value to a device register.  All of the BMA250 registers are
 read only except for the configuration and control registers.  This function
 does not do any form of error checking, so trying to write to one of the
 read-only registers may result in undesireable behavior.
 @param addr device register address
 @param data data to be written to the specified register address
 */
-void BMA250E_WriteReg(uint8_t addr, uint8_t data);
+void BMA250_WriteReg(uint8_t addr, uint8_t data);
 
 /**
 Read an 8-bit value from a device register.
 @param addr device register address
 @return data read from the specified register address
 */
-uint8_t BMA250E_ReadReg(uint8_t addr);
+uint8_t BMA250_ReadReg(uint8_t addr);
 
 /**
 Read WHO_AM_I identification register.
 @return contents of WHO_AM_I register.  Value always = 0x33 (ascii '3').
 */
-uint8_t BMA250E_GetWhoAmIReg(void);
+uint8_t BMA250_GetWhoAmIReg(void);
 
 
-int16_t BMA250E_GetXaxisRaw(void);
-int16_t BMA250E_GetYaxisRaw(void);
-int16_t BMA250E_GetZaxisRaw(void);
+int16_t BMA250_GetXaxisRaw(void);
+int16_t BMA250_GetYaxisRaw(void);
+int16_t BMA250_GetZaxisRaw(void);
 
-float BMA250E_GetXaxis(void);
-float BMA250E_GetYaxis(void);
-float BMA250E_GetZaxis(void);
+float BMA250_GetXaxis(void);
+float BMA250_GetYaxis(void);
+float BMA250_GetZaxis(void);
 
 
-#endif  /* BMA250E_H */
+#endif  /* BMA250_H */
