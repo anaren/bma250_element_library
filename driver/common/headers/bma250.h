@@ -129,14 +129,41 @@ Read WHO_AM_I identification register.
 */
 uint8_t BMA250_GetWhoAmIReg(void);
 
+/**
+ * This function will return the current PMU range for the accelerometer.
+ */
 BMA250_accel_mode_t BMA250_GetPMURange();
 
+/*
+ * This will return the raw X axis register reading
+ */
 int16_t BMA250_GetXaxisRaw(void);
+
+
+/*
+ * This will return the raw Y axis register reading
+ */
 int16_t BMA250_GetYaxisRaw(void);
+
+
+/*
+ * This will return the raw Z axis register reading
+ */
 int16_t BMA250_GetZaxisRaw(void);
 
+/*
+ * This will return the X axis reading scaled to m/s^2
+ */
 float BMA250_GetXaxis(void);
+
+/*
+ * This will return the Y axis reading scaled to m/s^2
+ */
 float BMA250_GetYaxis(void);
+
+/*
+ * This will return the Z axis reading scaled to m/s^2
+ */
 float BMA250_GetZaxis(void);
 
 
